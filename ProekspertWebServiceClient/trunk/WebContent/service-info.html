@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Service Data</title>
+	<link type="text/css" rel="stylesheet" href="css/main.css" />
+	<script type="text/javascript" src="js/json2.js"></script>
+	<script type="text/javascript" src="js/moment-with-langs.min.js"></script>
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"> </script>
+	<!-- Addressing Internet Explorer 8 jQuery.ajax issue by using jquery.xdomainrequest.min.js-->
+	<script type="text/javascript" src="js/jquery.xdomainrequest.min.js"> </script>
+	<script type="text/javascript" src="js/proekspert.ws.load.js"> </script>
+</head>
+<body onload="scheduleDataLoad(3000);">
+	<h1>Showing data provided by the Proekspert web service.</h1>
+	<div id="serviceButtons">
+		<button onclick="stopScheduledDataLoad();" class="button">Stop loading new data</button>
+		<button onclick="scheduleDataLoad(2000);" class="button">Resume loading new data</button>
+		<button onclick="clearData();" class="button">Clear loaded data</button>
+	</div>
+	<div id="errorMessage" class="error"></div>
+	<div id="output"></div>
+</body>
+</html>
