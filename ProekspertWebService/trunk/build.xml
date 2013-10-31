@@ -34,7 +34,7 @@
 		<copy file="${readme.file}" todir="${dist.dir}" />
 	</target>
 	
-	<target name="jar" depends="build, app-init" description="Creating runnable JAR file">
+	<target name="package" depends="build, app-init" description="Creating runnable JAR file">
 		<manifestclasspath property="jar.classpath" jarfile="${runnable.jar}">
 			<classpath refid="dist.app.classpath" />
 		</manifestclasspath>
