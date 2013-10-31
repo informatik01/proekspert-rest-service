@@ -1,9 +1,13 @@
 var wsURL = "http://192.168.1.73:11555/proekspert/service/data";
 var currentRequestId = -1;
 
+// Dealing with "console is not defined" issue in IE
+if (!window.console) {
+	console = {log: function() {}};
+}
+
 // Loading data using pure JavaScript
 function loadData(callback) {
-	console.log("Making AJAX request to recieve JSON response.");
 	var xdr = createXDR("GET", wsURL);
 	xdr.timeout = 3000;
 	var errorMessage = document.getElementById("errorMessage");
@@ -21,7 +25,6 @@ function loadData(callback) {
 
 // Loading data using jQuery.ajax()
 function loadDataJQ(callback) {
-	console.log("Making AJAX request with jQuery.ajax().");
 	$.ajax({
 		type: "GET",
 		url: wsURL,
@@ -60,26 +63,33 @@ function process(data) {
 	} else {
 		output.before("<b>No data available at the moment</b>");
 	}
-	$("#errorMessage").html("");
+	$("#errorMessage").empty();
 	
-	
-	$("<p>").appendTo(output).text("Request sequence ID: ").
-		append($('<span class="data">').text(data.id));
-	$("<p>").appendTo(output).text("Associated phone number: ").
-	append($('<span class="data">').text(data.servicePhoneNumber));
+	/*
+	 * IMPLEMENTATION NOTE
+	 * Due to the issues with IE (excluding version 10, probably 9?)
+	 * there is a lot plain string concatenations, instead of chaining
+	 * ".text()" or ".html()". Although not a problem by itself, but still
+	 * makes the code look less elegant. The current solution works on
+	 * Internet Explorer 8+.
+	 */
+	$("<p>").appendTo(output).text('Request sequence ID: ').
+		append($('<span class="data">'+ data.id + '</span>'));
+	$("<p>").appendTo(output).text('Associated phone number: ').
+	append($('<span class="data">' + data.servicePhoneNumber + '</span>'));
 	$("<p>").appendTo(output).text("Service language: ").
-	append($('<span class="data">').text(data.serviceLanguage));
+	append($('<span class="data">' + data.serviceLanguage + '</span>'));
 	
 	// Checking whether the service is active, and if not - no more output
-	$("<p>").appendTo(output).text("Service is ").
-	append($('<span class="data">').text(
-			(data.active == true ? "active" : "inactive")));
+	$("<p>").appendTo(output).text('Service is ').
+	append($('<span class="data">' +
+			(data.active ? 'active' : 'inactive') + '</span>'));
 	if (!data.active) {
 		return;
 	}
-	$("<p>").appendTo(output).text("Service active until ").
-	append($('<span class="data">').text(
-			moment(data.serviceEndDate).format("MMMM D YYYY HH:mm")));
+	$("<p>").appendTo(output).text('Service active until ').
+	append($('<span class="data">' + 
+			moment(data.serviceEndDate).format("MMMM D YYYY HH:mm") + '</span>'));
 	
 	// Checking whether the XL-Additional service is active
 	var xlServiceActivationTime = "";
@@ -92,17 +102,17 @@ function process(data) {
 				data.xlServiceEndTime.values.toString(),
 		"HH,mm,SS,SSS").format("HH:mm");
 	}
-	$("<p>").appendTo(output).text("XL-service ").
-	append($('<span class="data">').text(
-			(data.xlService ? "active (" + xlServiceActivationTime +
-							  		  " - " + xlServiceEndTime + ") in " +
-							  		  data.xlServiceLanguage + " language"
-							  : "inactive")));
+	$("<p>").appendTo(output).text('XL-service ').
+	append($('<span class="data">' + 
+			(data.xlService ? 'active (' + xlServiceActivationTime +
+							  		  ' - ' + xlServiceEndTime + ') in ' +
+							  		  data.xlServiceLanguage + ' language'
+							  : 'inactive') + '</span>'));
 	
 	// Populating the list of names and phone numbers
 	// if the override list is in use
 	if (data.overrideListInUse) {
-		$('<p style="margin-bottom: 5px;">').appendTo(output).text("Except for");
+		$('<p style="margin-bottom: 5px;">').appendTo(output).text('Except for');
 	
 		var table = $("<table>");
 		$("<tr>").appendTo(table).
@@ -118,7 +128,8 @@ function process(data) {
 }
 
 function clearData() {
-	$("#output").html("");
+	$("#output").empty();
+	currentRequestId = -1;
 }
 
 /********** Scheduling periodic AJAX load of data **********/
