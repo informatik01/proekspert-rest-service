@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.joda.time.LocalTime;
 
+/**
+ * <code>ServiceMessage</code> is a JavaBean class for storing
+ * legacy service related data.
+ *
+ */
 public class ServiceMessage {
 	
 	private int id;

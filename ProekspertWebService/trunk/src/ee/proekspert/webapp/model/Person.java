@@ -1,5 +1,10 @@
 package ee.proekspert.webapp.model;
 
+/**
+ * <code>Person</code> is a simple JavaBean class for storing
+ * information related to a person.
+ *
+ */
 public class Person {
 	
 	private String name;
