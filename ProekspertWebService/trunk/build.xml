@@ -5,7 +5,6 @@
 	
 	<!-- Setting the classpath for the project -->
 	<path id="project.classpath">
-		<!--pathelement location="${build.dir}" /-->
 		<fileset dir="${lib.dir}" />
 	</path>
 	
@@ -19,22 +18,26 @@
 			<classpath refid="project.classpath" />
 			<compilerarg value="-Xlint:none" />
 		</javac>
+		<copy todir="${build.dir}">
+			<fileset dir="${src.dir}" excludes="**/*.java" />	
+		</copy>
 	</target>
 	
-	<target name="app-init" description="Preparation for creating runnable JAR file">
+	<target name="pre-package" description="Preparation for creating runnable JAR file">
 		<copy todir="${dist.dir}">
 			<fileset dir="${build.dir}" />
-			<!-- Copying config files -->
-			<fileset dir="${src.dir}" excludes="**/*.java" />
 		</copy>
 		<copy todir="${dist.dir}/lib">
-			<fileset dir="${lib.dir}" />
+			<fileset dir="${lib.dir}">
+				<exclude name="junit*" />
+				<exclude name="hamcrest*" />
+			</fileset>
 		</copy>
 		<copy file="${startup.file}" todir="${dist.dir}" />
 		<copy file="${readme.file}" todir="${dist.dir}" />
 	</target>
 	
-	<target name="package" depends="build, app-init" description="Creating runnable JAR file">
+	<target name="package" depends="build, pre-package" description="Creating runnable JAR file">
 		<manifestclasspath property="jar.classpath" jarfile="${runnable.jar}">
 			<classpath refid="dist.app.classpath" />
 		</manifestclasspath>
@@ -63,8 +66,31 @@
 		</delete>
 	</target>
 	
+	<target name="pre-test" description="Preparation for running unit tests">
+		<mkdir dir="${test.build.dir}"/>
+		<javac srcdir="${test.src.dir}" destdir="${test.build.dir}" debug="on" includeAntRuntime="false">
+			<classpath>
+				<path refid="project.classpath" />
+				<pathelement location="${build.dir}" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="test" depends="build, pre-test" description="Run unit tests">
+		<junit printsummary="true" showoutput="true">
+			<classpath>
+				<path refid="project.classpath" />
+				<pathelement location="${build.dir}" />
+				<path location="${test.build.dir}" />
+			</classpath>
+			<formatter type="plain" usefile="false" />
+			<test name="ee.proekspert.webapp.util.PropertiesUtilTest" />
+		</junit>
+	</target>
+	
 	<target name="clean" description="Clean up">
 		<delete dir="${dist.dir}" />
+		<delete dir="${test.build.dir}" />
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset dir="${build.dir}" includes="**/*" />
 		</delete>

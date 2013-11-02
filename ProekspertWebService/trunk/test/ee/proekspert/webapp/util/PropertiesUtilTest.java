@@ -6,6 +6,9 @@ import static org.junit.Assert.assertEquals;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ee.proekspert.webapp.util.PropertiesUtil;
+import ee.proekspert.webapp.util.PropertiesUtilException;;
+
 public class PropertiesUtilTest {
 
 	private static final String CONFIG_FILE = "config.properties";
