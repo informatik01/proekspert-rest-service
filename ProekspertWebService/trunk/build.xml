@@ -6,6 +6,7 @@
 	<!-- Setting the classpath for the project -->
 	<path id="project.classpath">
 		<fileset dir="${lib.dir}" />
+		<pathelement location="${build.dir}" />
 	</path>
 	
 	<!-- Setting the classpath for the distributed application -->
@@ -71,7 +72,6 @@
 		<javac srcdir="${test.src.dir}" destdir="${test.build.dir}" debug="on" includeAntRuntime="false">
 			<classpath>
 				<path refid="project.classpath" />
-				<pathelement location="${build.dir}" />
 			</classpath>
 		</javac>
 	</target>
@@ -80,7 +80,6 @@
 		<junit printsummary="true" showoutput="true">
 			<classpath>
 				<path refid="project.classpath" />
-				<pathelement location="${build.dir}" />
 				<path location="${test.build.dir}" />
 			</classpath>
 			<formatter type="plain" usefile="false" />
