@@ -29,9 +29,9 @@ To resolve this issue, you need first to clean the project (in the menu choose "
 and after that the Main application will run successfully.
 
 Also when trying to run JUnit tests in Eclipse right after building the project with Ant task,
-an exception might be thrown. Again, the solution is to clean the project fefore running unit tests.
+an exception might be thrown. Again, the solution is to clean the project before running unit tests.
 
-So either clean the project everytime **after** building with custom Ant build file in Eclipse,
+So either clean the project every time **after** building with custom Ant build file in Eclipse,
 or just uncheck the "Build Automatically" option (in the main menu "Project > Build Automatically")
 to avoid the above described issues. Or just DONT'T USE Ant build file while in Eclipse, because
 the default "Build Automatically" option will do just fine.
