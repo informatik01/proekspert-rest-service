@@ -76,7 +76,7 @@
 		</javac>
 	</target>
 	
-	<target name="test" depends="build, pre-test" description="Run unit tests">
+	<target name="test" depends="package, pre-test" description="Run unit tests">
 		<junit printsummary="true" showoutput="true">
 			<classpath>
 				<path refid="project.classpath" />
