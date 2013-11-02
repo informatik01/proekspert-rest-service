@@ -43,11 +43,24 @@ public class PropertiesUtilTest {
 		assertEquals(WEB_SERVICE_APP_CONTEXT, propertiesUtil.getProperty("web.service.app.context"));
 		assertEquals(WEB_SERVER_ROOT_DIR, propertiesUtil.getProperty("web.server.root.dir"));
 		assertEquals(WEB_SERVER_PORT, Integer.parseInt(propertiesUtil.getProperty("web.server.port")));
+		
 	}
 
+	@Test(expected = PropertiesUtilException.class)
+	public void testGetMissingProperty() {
+		String missingProperty = "missing.property";
+		propertiesUtil.getProperties(missingProperty);
+	}
+	
 	@Test
 	public void testGetProperties() {
 		assertArrayEquals(resources, propertiesUtil.getProperties("legacy.interface.resources"));
+	}
+	
+	@Test(expected = PropertiesUtilException.class)
+	public void testGetMissingProperties() {
+		String missingProperty = "missing.properties";
+		propertiesUtil.getProperties(missingProperty);
 	}
 
 }
