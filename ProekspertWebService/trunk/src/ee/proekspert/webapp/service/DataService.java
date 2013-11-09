@@ -33,7 +33,7 @@ public class DataService {
 	 * IMPLEMENTATION NOTE
 	 * Using DEBUG level to log network request not to pollute file system
 	 * with excessive data (service makes a request every 5 seconds).
-	 * It is known in advance that some legacy interface are unavailable.
+	 * It is known in advance that some legacy interfaces are unavailable.
 	 */
 	
 	private static final Logger logger = Logger.getLogger(DataService.class);
@@ -46,13 +46,11 @@ public class DataService {
 	
 	private static final int NTHREADS = 10;
 	
-	private static final String[] RESOURCES;
-	private static final int RESOURCES_COUNT;
-	static {
-		PropertiesUtil propertiesUtil = new PropertiesUtil(CONFIG_FILE);
-		RESOURCES = propertiesUtil.getProperties("legacy.interface.resources");
-		RESOURCES_COUNT = RESOURCES.length;
-	}
+	private static final int RESOURCES_COUNT = 9;
+	private static final int REQUEST_PARAMETER_START = 1;
+	private static final String REQUEST_PARAMETER_PATTERN = "\\{\\d\\}";
+	private static final String RESOURCE_TEMPLATE =
+			new PropertiesUtil(CONFIG_FILE).getProperty("legacy.interface.resource");
 	
 	private static final ReentrantReadWriteLock counterLock = new ReentrantReadWriteLock();
 	private static final ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
@@ -64,7 +62,7 @@ public class DataService {
 	private int PERIOD = 5;
 	private ScheduledFuture<?> future;
 	
-	private AtomicInteger counter = new AtomicInteger();
+	private AtomicInteger counter = new AtomicInteger(REQUEST_PARAMETER_START);
 	
 	private boolean started;
 
@@ -108,7 +106,7 @@ public class DataService {
 			return;
 		}
 		
-		final Runnable serviceReader = new Runnable() {
+		final Runnable task = new Runnable() {
 			@Override
 			public void run() {
 				threadPool.execute(new Runnable() {
@@ -119,7 +117,7 @@ public class DataService {
 				});
 			}
 		};
-		future = scheduler.scheduleAtFixedRate(serviceReader, 0, PERIOD, TimeUnit.SECONDS);
+		future = scheduler.scheduleAtFixedRate(task, 0, PERIOD, TimeUnit.SECONDS);
 		started = true;
 		logger.info("Data Service started successfully in concurrent mode.");
 	}
@@ -180,7 +178,7 @@ public class DataService {
 		counterLock.writeLock().lock();
 		try {
 			if (counter.get() > RESOURCES_COUNT) {
-				counter.set(0);
+				counter.set(REQUEST_PARAMETER_START);
 			}
 		} finally {
 			counterLock.writeLock().unlock();
@@ -200,7 +198,8 @@ public class DataService {
 		
 		String rawServiceData = "";
 		try {
-			rawServiceData = fetchRawServiceData(RESOURCES[index]);
+			rawServiceData = fetchRawServiceData(
+					RESOURCE_TEMPLATE.replaceFirst(REQUEST_PARAMETER_PATTERN, "" + index));
 		} catch (IOException e) {
 			// Could not fetch service data, log and return
 			logger.debug(e);

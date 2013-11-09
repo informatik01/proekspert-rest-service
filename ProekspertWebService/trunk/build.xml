@@ -19,6 +19,7 @@
 			<classpath refid="project.classpath" />
 			<compilerarg value="-Xlint:none" />
 		</javac>
+		<!-- Copying properties file(s) -->
 		<copy todir="${build.dir}">
 			<fileset dir="${src.dir}" excludes="**/*.java" />	
 		</copy>
@@ -51,7 +52,7 @@
 			</fileset>
 			<manifest>
 				<attribute name="Main-Class" value="ee.proekspert.webapp.Main"/>
-				<!-- NB! Also adding . to classpath -->
+				<!-- NB! Also adding . to the classpath -->
 				<attribute name="Class-Path" value=". ${jar.classpath}" />
 			</manifest>
 		</jar>
@@ -74,10 +75,14 @@
 				<path refid="project.classpath" />
 			</classpath>
 		</javac>
+		<!-- Copying test properties file(s) -->
+		<copy todir="${test.build.dir}">
+			<fileset dir="${test.src.dir}" excludes="**/*.java" />	
+		</copy>
 	</target>
 	
 	<target name="test" depends="package, pre-test" description="Run unit tests">
-		<junit printsummary="true" showoutput="true">
+		<junit>
 			<classpath>
 				<path refid="project.classpath" />
 				<path location="${test.build.dir}" />

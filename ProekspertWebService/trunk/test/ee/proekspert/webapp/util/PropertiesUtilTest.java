@@ -11,7 +11,7 @@ import ee.proekspert.webapp.util.PropertiesUtilException;;
 
 public class PropertiesUtilTest {
 
-	private static final String CONFIG_FILE = "config.properties";
+	private static final String CONFIG_FILE = "test_config.properties";
 	
 	private static final String WEB_SERVICE_BASE_URI = "http://192.168.1.73";
     private static final int WEB_SERVICE_PORT = 11555;
@@ -21,8 +21,7 @@ public class PropertiesUtilTest {
     		"/My Source Code/Java EE/Proekspert/ProekspertWebServiceClient/WebContent/";
     private static final int WEB_SERVER_PORT = 80; 
 	
-    private static final String[] resources = { "http://people.proekspert.ee/ak/data_0.txt",
-										    	"http://people.proekspert.ee/ak/data_1.txt",
+    private static final String[] resources = { "http://people.proekspert.ee/ak/data_1.txt",
 										    	"http://people.proekspert.ee/ak/data_2.txt",
 										    	"http://people.proekspert.ee/ak/data_3.txt",
 										    	"http://people.proekspert.ee/ak/data_4.txt",
