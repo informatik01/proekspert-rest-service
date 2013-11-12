@@ -40,6 +40,7 @@
 	</target>
 	
 	<target name="package" depends="build, pre-package" description="Creating runnable JAR file">
+		<!-- Creating a list of libraries for the Class-Path attribute in the MANIFEST.MF -->
 		<manifestclasspath property="jar.classpath" jarfile="${runnable.jar}">
 			<classpath refid="dist.app.classpath" />
 		</manifestclasspath>
@@ -75,7 +76,7 @@
 				<path refid="project.classpath" />
 			</classpath>
 		</javac>
-		<!-- Copying test properties file(s) -->
+		<!-- Copying properties file(s) for the unit tests -->
 		<copy todir="${test.build.dir}">
 			<fileset dir="${test.src.dir}" excludes="**/*.java" />	
 		</copy>

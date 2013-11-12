@@ -51,7 +51,7 @@ public class PropertiesUtilTest {
 	@Test(expected = PropertiesUtilException.class)
 	public void testGetMissingProperty() {
 		String missingProperty = "missing.property";
-		propertiesUtil.getProperties(missingProperty);
+		propertiesUtil.getProperty(missingProperty);
 	}
 	
 	@Test

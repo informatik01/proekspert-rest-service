@@ -25,7 +25,6 @@ running the Main application or JUnit tests in Eclipse AFTER building the projec
 will cause an exception to be thrown.
 
 To resolve this issue, either clean the project (in the main menu choose "Project > Clean...")
-every time after building with the Ant build file in Eclipse, or just uncheck the
-"Build Automatically" option (in the main menu "Project > Build Automatically") to avoid the
-above described issue. Or just DONT'T USE Ant build file while in Eclipse, because it is mainly
-meant for using outside of the IDE.
+every time after building with the Ant build file in Eclipse, or uncheck the "Build Automatically"
+option (in the main menu "Project > Build Automatically") to avoid the above described issue.
+Or just DONT'T USE Ant build file while in Eclipse, because it is mainly meant for using outside of the IDE.
