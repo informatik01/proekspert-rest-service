@@ -1,4 +1,9 @@
-var wsURL = "http://192.168.1.73:11555/proekspert/service/data";
+var hostProtocol = window.location.protocol;
+var hostURL = window.location.host;
+var wsPort = 11555;
+var wsPath = "/proekspert/service/data";
+var wsURL = hostProtocol + "//" + hostURL + ":" + wsPort + wsPath;
+
 var currentRequestId = -1;
 
 // Dealing with "console is not defined" issue in IE
