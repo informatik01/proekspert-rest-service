@@ -13,7 +13,7 @@ public class PropertiesUtilTest {
 
 	private static final String CONFIG_FILE = "test_config.properties";
 	
-	private static final String WEB_SERVICE_BASE_URI = "http://192.168.1.73";
+	private static final String WEB_SERVICE_BASE_URI = "http://0.0.0.0";
     private static final int WEB_SERVICE_PORT = 11555;
     private static final String WEB_SERVICE_APP_CONTEXT = "proekspert";
     
