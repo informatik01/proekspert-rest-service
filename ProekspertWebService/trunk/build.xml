@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="ProekspertWebService" basedir="." default="build">
+<project name="ProekspertWebService"
+		basedir="."
+		default="build"
+		xmlns:ivy="antlib:org.apache.ivy.ant">
 	
 	<property file="build.properties" />
 	
@@ -14,7 +17,11 @@
 		<fileset dir="${dist.dir}/lib" />
 	</path>
 	
-	<target name="build" depends="clean" description="Building project">
+	<target name="resolve" description="Retreive dependencies with Apache Ivy">
+		<ivy:retrieve sync="true" type="jar, bundle" />
+	</target>
+	
+	<target name="build" depends="clean, resolve" description="Building project (default)">
 		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="on" includeAntRuntime="false">
 			<classpath refid="project.classpath" />
 			<compilerarg value="-Xlint:none" />

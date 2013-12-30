@@ -10,6 +10,9 @@ Run the Ant task named "package" to compile and package the application in the f
 of runnable JAR file. The resulting JAR file along with necessary libraries and
 the startup script will be placed to the "dist" folder.
 
+Note: the Apache Ivy is used as a dependency manager, so make sure that the Apache Ant
+installation contains the required Ivy JAR file in the $ANT_HOME/lib directory.
+See the Apache Ivy documentation for the detailed information.
 ==========
 HOW TO USE
 ==========
