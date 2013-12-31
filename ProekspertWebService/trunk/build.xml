@@ -17,7 +17,7 @@
 		<fileset dir="${dist.dir}/lib" />
 	</path>
 	
-	<target name="resolve" description="Retreive dependencies with Apache Ivy">
+	<target name="resolve" description="Retrieve dependencies with Apache Ivy">
 		<ivy:retrieve sync="true" type="jar, bundle" />
 	</target>
 	
