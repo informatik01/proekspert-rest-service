@@ -6,7 +6,7 @@ var wsURL = hostProtocol + "//" + hostURL + ":" + wsPort + wsPath;
 
 var currentRequestId = -1;
 
-// Dealing with "console is not defined" issue in IE
+// Dealing with the "console is not defined" issue in IE.
 if (!window.console) {
 	console = {log: function() {}};
 }
@@ -73,8 +73,8 @@ function process(data) {
 	/*
 	 * IMPLEMENTATION NOTE
 	 * Due to the issues with IE (excluding version 10, probably 9?)
-	 * there is a lot plain string concatenations, instead of chaining
-	 * ".text()" or ".html()". Although not a problem by itself, but still
+	 * we are using plain string concatenations, instead of method chaining
+	 * (".text()" or ".html()"). Although not a problem by itself, but still
 	 * makes the code look less elegant. The current solution works on
 	 * Internet Explorer 8+.
 	 */
