@@ -1,5 +1,8 @@
-This project is a Java assignment. Below there is a brief description of the assignment.<br>
-The PDF document containing full description along with the related implementation requirements can be downloaded from my [Google Drive](https://drive.google.com/file/d/0BxGozyk59-gGRVJRSzVqTkY0ajA/edit?usp=sharing).
+**NOTE**<br />
+*This project was made as an assignment. Below there is a brief description of the assignment.<br>
+The PDF document containing full description along with the related implementation requirements can be downloaded from my [Google Drive](https://drive.google.com/file/d/0BxGozyk59-gGRVJRSzVqTkY0ajA/edit?usp=sharing).*
+
+---
 
 **IMPLEMENTATION NOTE:**<br>
 The project is implemented utilizing Cross-Origin Resource Sharing ([CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).
