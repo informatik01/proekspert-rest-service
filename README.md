@@ -1,5 +1,3 @@
-##Java REST web service (JAX-RS) and AJAX web client.
-
 This project is a Java assignment. Below there is a brief description of the assignment.<br>
 The PDF document containing full description along with the related implementation requirements can be downloaded from my [Google Drive](https://drive.google.com/file/d/0BxGozyk59-gGRVJRSzVqTkY0ajA/edit?usp=sharing).
 
