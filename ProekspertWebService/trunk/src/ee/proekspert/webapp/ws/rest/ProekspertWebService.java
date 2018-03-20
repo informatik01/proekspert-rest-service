@@ -25,6 +25,7 @@ public class ProekspertWebService {
 		response.addHeader("Access-Control-Allow-Origin", "*");
 		// Addressing IE caching issues
 		response.addHeader("Cache-Control", "max-age=0,no-cache,no-store,post-check=0,pre-check=0");
+		
 		return DataService.getSeviceMessage();
 	}
 	
