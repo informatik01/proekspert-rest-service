@@ -6,9 +6,9 @@ The PDF document containing full description along with the related implementati
 The project is implemented utilizing Cross-Origin Resource Sharing ([CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing)).
 
 ----
-##Brief description of the Java assignment
+## Brief description of the Java assignment
 
-###Service
+### Service
 The goal is to prepare an application that periodically queries data from the network, converts that data to a suitable format and serves it up as a web service in JSON format. In order to obtain the source data, one needs to query a “legacy” data interface, located at http://people.proekspert.ee/ak/. The request format for the interface is “data_n.txt”
 (wherein n is replaced by a number between 1-9).
 
@@ -35,8 +35,9 @@ Data is “service parameters“, provided as positional text:
 **8\*LLL..:** names (20 symbols \* 8 = 160 symbols)<br />
 
 
-<br />
-###Client
+<br>
+
+### Client
 The goal is to prepare an HTML page that periodically reads data from the service created by you using AJAX and displays them on the screen. The following items should be displayed regarding the service:
  1. Request sequence number
  2. Associated phone number (from parameter B)
